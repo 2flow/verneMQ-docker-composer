@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  verneMQ:
+    environment:
+      - DOCKER_VERNEMQ_ACCEPT_EULA=yes
+    image: vernemq/vernemq
+    ports:
+      - "8888:8888"
+      - "1883:1883"
+      - "8080:8080"
