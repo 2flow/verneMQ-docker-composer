@@ -1,4 +1,8 @@
 # Setup for azure
 
-This does not work!! Why? I do not know
-I added the Azure blob to the web app and tryed a few things to mount it inside the container, but always end up with **Volume source must be specified.**
+* posgres on web app --> permission error
+* web app only exports port 80 and 443
+
+setup docker on vm: 
+* https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+* https://docs.docker.com/compose/install/

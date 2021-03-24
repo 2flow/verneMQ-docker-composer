@@ -7,7 +7,7 @@ services:
       - DOCKER_VERNEMQ_ACCEPT_EULA=yes
     image: vernemq/vernemq
     volumes:
-      - vernemqconfig: /etc/vernemq
+      - ./vernemqconfig:/etc/vernemq
     ports:
       - "8888:8888"
       - "1883:1883"
@@ -22,24 +22,25 @@ services:
     #   - "5432:5432"
     restart: unless-stopped
     volumes:
-      - postgresdata: /var/lib/postgresql/data
-      - postgresconfig: /docker-entrypoint-initdb.d
+      - ./postgresdata:/var/lib/postgresql/data
+      - ./postgres-config:/docker-entrypoint-initdb.d
 
   pgadmin:
     image: dpage/pgadmin4
     depends_on:
       - db
     ports:
-      - 5555:80
+      - "80:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: flo@me.com
       PGADMIN_DEFAULT_PASSWORD: secretPassword
+      PGADMIN_LISTEN_PORT: 80
     restart: unless-stopped
 
-volumes:
+#volumes:
   # for this the setting WEBSITES_ENABLE_APP_SERVICE_STORAGE has to be true
   # https://docs.microsoft.com/en-us/azure/app-service/configure-custom-container?pivots=container-linux#use-persistent-shared-storage
-  postgresdata: ${WEBAPP_STORAGE_HOME}/posgtresql/
+  #postgresdata: ${WEBAPP_STORAGE_HOME}/posgtresql/
   # for this two we are using a blob storage account
   # take a look here: https://stackoverflow.com/a/58883270
  # postgresconfig: /databaseconfig
