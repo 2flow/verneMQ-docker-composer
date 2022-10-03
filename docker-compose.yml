@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   vernemqq:
-    depends_on: 
+    depends_on:
       - db
     environment:
       - DOCKER_VERNEMQ_ACCEPT_EULA=yes
@@ -13,7 +13,7 @@ services:
       - "8080:8080"
 
   db:
-    environment: 
+    environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=somepassword
 #    image: 'postgres'
@@ -36,5 +36,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgresdata: ${WEBAPP_STORAGE_HOME}/posgtresql/
+  postgresdata:
+        external:
+                name: ${WEBAPP_STORAGE_HOME}/posgtresql/
 #    external: true
